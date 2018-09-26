@@ -1,24 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+// Header and 2 buttons to link to the pages
 const Header = ()=>{
   return (
     <nav>
       <div className="nav-wrapper">
         <ul className="right">
           <li key="1">
-            <button className="blue btn-flat white-text">
-              <Link to="/needToBuy"> Need to Buy
-                <i className="material-icons right">shopping_basket</i>
-              </Link>
-            </button>
+            <Link to="/needToBuy" className="blue btn-flat white-text">
+              Need to Buy
+              <i className="material-icons right">shopping_basket</i>
+            </Link>
           </li>
           <li key="2">
-            <button className="green btn-flat white-text">
-              <Link to="/inMyCart"> In My Cart
-                <i className="material-icons right">shopping_cart</i>
-              </Link>
-            </button>
+            <Link to="/inMyCart" className="green btn-flat white-text">
+              In My Cart
+              <i className="material-icons right">shopping_cart</i>
+            </Link>
           </li>
         </ul>
       </div>

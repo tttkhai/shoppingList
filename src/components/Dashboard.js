@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { reduxForm, Field } from 'redux-form';
-import {Link} from 'react-router-dom';
-
-import InputFields from './InputFields';
+import {connect} from 'react-redux';
+import * as actions from '../actions';
+import InputForm from './InputForm';
 
 class Dashboard extends Component{
-
-  renderFields(){
-    return (<Field component={InputFields} type="text" label="Please enter you item here" name="item"/>);
+  state = {
+    itemList: []
   }
 
+// handle input submission
+  onItemSubmit=(item)=>{
+    const itemList = this.state.itemList;
+    // check if item is already in the list
+    if(itemList.includes(item)){
+      alert('You already had this item in cart');
+    }
+    // concat item to array list then handle input submission
+    else {
+      this.setState({
+        itemList: [...this.state.itemList, item],
+      });
+      this.props.submitInput(itemList);
+    }
+  }
+
+  // render Input Form
   render(){
-      return(
-        <div>
-        // need to write some more
-          <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
-            {this.renderFields()}
-            <button type="submit" className="red right btn-flat white-text">
-              Add item to Need To Buy
-              <i className="material-icons right"> add_shopping_cart </i>
-            </button>
-          </form>
-        </div>
-      );
+    return(
+      <div>
+        <InputForm onItemSubmit={(item)=> this.onItemSubmit(item)}/>
+      </div>
+    );
   }
-
 };
 
-export default reduxForm({
-  form: 'itemForm'
-})(Dashboard);
+export default connect(null, actions) (Dashboard);

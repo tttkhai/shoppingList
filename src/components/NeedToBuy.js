@@ -4,17 +4,17 @@ import {Link} from 'react-router-dom';
 import * as actions from '../actions';
 
 class NeedToBuy extends Component {
-  render(){
-    // xem lai phan tai sao lai co _id
-    return this.props.items.map(({_id, item}) =>{
+  // return items that exist in the "Need To Buy"
+  renderItem(){
+    let id =0;
+    return this.props.buy_items.map(buy_item =>{
         return (
-          <div className="card darken-1" key={_id}>
+          <div className="card darken-1" key={++id}>
             <div className="card-content">
               <p>
-                {item}
+                {buy_item.item}
               </p>
-              // write a function to handle the state
-              <button className="right">
+              <button className="right" onClick={() => this.props.addToCart(buy_item)}>
                 Add to In My Cart
               </button>
             </div>
@@ -22,6 +22,19 @@ class NeedToBuy extends Component {
         );
     });
   };
+  
+  //render in the page
+  render(){
+    return (
+      <div className="container">
+        {this.renderItem()}
+      </div>
+    );
+  };
 }
 
-export default connect(null, actions)(NeedToBuy);
+function mapStateToProps ({buy_item}){
+  return {buy_item};
+}
+
+export default connect(mapStateToProps, actions) (NeedToBuy);

@@ -1,13 +1,13 @@
 import React from 'react';
 
-// fixing error parts
-export default ({ input, label, error }) => {
+// export input field
+export default ({ input, label, meta: {touched, error} }) => {
   return (
     <div>
       <label> {label} </label>
       <input {...input} style={{marginBottom: '5px'}} />
-      <div className="red-text" style={{marginBottom: '5px'}}>
-      {error}
+      <div>
+      {touched && error}
       </div>
     </div>
   );
