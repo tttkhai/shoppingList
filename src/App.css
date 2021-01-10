@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.app-block{
+  border: 1px solid black;
+  height: 500px;
+  width: 300px;
+}
+
+ul {
+  list-style-type: none;
+}
