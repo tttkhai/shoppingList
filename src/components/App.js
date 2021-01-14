@@ -1,4 +1,4 @@
-import '../App.css';
+import '../index.css';
 import Cart from './Cart';
 import WishList from './WishList';
 import { withFormik, Form, Field } from "formik";
@@ -50,7 +50,7 @@ const FormikApp = withFormik({
     }
 
     props.wishList.push(values.product);
-
+    props.addToWishList(props.wishList)
     resetForm();
   }
 })(App);
@@ -59,4 +59,8 @@ function mapStateToProps({ cart, wishList }) {
   return { cart, wishList };
 }
 
-export default connect(mapStateToProps, null)(FormikApp);
+function mapDispatchToProps(dispatch) {
+  return { addToWishList: (data) => dispatch({type: 'ADD_TO_WISH_LIST', payload: data}) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormikApp);
